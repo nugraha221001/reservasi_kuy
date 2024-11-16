@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "121578279493",
+    "project_id": "reservationapp-cb1c7",
+    "storage_bucket": "reservationapp-cb1c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121578279493:android:1774fa88dcf9b7869e092c",
+        "android_client_info": {
+          "package_name": "co.id.kenarok.reservation_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtEmcOb7zB67ZrYRJfASEusvP5S2idNRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
