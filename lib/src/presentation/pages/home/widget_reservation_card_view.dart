@@ -134,6 +134,7 @@ class ReservationCardView extends StatelessWidget {
                         TextTitleDescriptionCardView(
                           text: reservation.information!,
                         ),
+                        const Gap(10),
                       ],
                     ),
                   ),

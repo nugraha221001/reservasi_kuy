@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextContentCardView extends StatelessWidget {
@@ -14,16 +15,21 @@ class TextContentCardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           name,
           style: GoogleFonts.openSans(fontSize: 12),
         ),
-        Text(
-          content,
-          style: GoogleFonts.openSans(
-            fontSize: 12,
+        const Gap(10),
+        Expanded(
+          child: Text(
+            content,
+            style: GoogleFonts.openSans(
+              fontSize: 12,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.fade,
+            textAlign: TextAlign.end,
           ),
         )
       ],

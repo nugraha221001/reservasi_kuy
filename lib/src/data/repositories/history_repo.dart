@@ -139,7 +139,7 @@ class HistoryRepo {
         "dateStart": dateStart,
         "dateEnd": dateEnd,
         "dateCreated": dateCreated,
-        "dateFinished": "",
+        "dateFinished": status == "Ditolak" ? DateTime.now().toString() : "",
         "contactId": contactId,
         "contactName": contactName,
         "information": information,

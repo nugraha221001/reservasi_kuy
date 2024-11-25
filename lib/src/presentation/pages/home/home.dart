@@ -603,19 +603,23 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                     builder: (context, state) {
                                       if (state is UserGetSuccess) {
                                         return Text(
-                                          "Selamat Datang, ${state.user.fullName}",
+                                          "${state.user.fullName}",
                                           style: const TextStyle(
                                             fontSize: 12,
                                             fontStyle: FontStyle.italic,
                                           ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.fade,
                                         );
                                       } else {
                                         return const Text(
-                                          "Selamat Datang, Pengguna",
+                                          "Pengguna",
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontStyle: FontStyle.italic,
                                           ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.fade,
                                         );
                                       }
                                     },

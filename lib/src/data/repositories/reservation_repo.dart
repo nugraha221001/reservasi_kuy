@@ -167,24 +167,40 @@ class ReservationRepo {
             .map((e) => ReservationModel.fromJson(e))
             .toList();
 
-        final List<ReservationModel> reservationBookedByDate = listReservation
-            .where(
-              (element) =>
-                  DateTime.parse(element.dateEnd!)
-                          .isAfter(DateTime.parse(dateStart)) &&
-                      DateTime.parse(element.dateStart!)
-                          .isBefore(DateTime.parse(dateEnd)) &&
-                      element.status == "Disetujui" ||
-                  DateTime.parse(element.dateStart!)
-                      .isAtSameMomentAs(DateTime.parse(dateEnd)) ||
-                  DateTime.parse(element.dateEnd!)
-                      .isAtSameMomentAs(DateTime.parse(dateStart)),
-            )
-            .toList();
+        final List<ReservationModel> reservationBookedByDate =
+        listReservation.where(
+              (element) {
+            // (enteredStart >= data.start && enteredStart <= data.end) ||
+            // (enteredEnd >= data.start && enteredEnd <= data.end) ||
+            // (data.start >= enteredStart && data.start <= enteredEnd);
+            if (element.status != "Disetujui") {
+              return false;
+            }
+            // Parsing tanggal hanya sekali untuk efisiensi
+            final DateTime elementStart = DateTime.parse(element.dateStart!);
+            final DateTime elementEnd = DateTime.parse(element.dateEnd!);
+            final DateTime enteredStart = DateTime.parse(dateStart);
+            final DateTime enteredEnd = DateTime.parse(dateEnd);
+
+            // Cek apakah interval bersinggungan
+            final bool isOverlapping = (enteredStart.isBefore(elementEnd) &&
+                enteredEnd.isAfter(elementStart)) ||
+                (enteredStart.isAtSameMomentAs(elementStart) ||
+                    (elementStart.isAtSameMomentAs(enteredStart) ||
+                        enteredEnd.isAtSameMomentAs(elementEnd)) ||
+                    elementEnd.isAtSameMomentAs(enteredEnd)) ||
+                (enteredStart.isAtSameMomentAs(elementEnd) ||
+                    (elementEnd.isAtSameMomentAs(enteredStart) ||
+                        enteredEnd.isAtSameMomentAs(elementStart)) ||
+                    elementStart.isAtSameMomentAs(enteredEnd));
+
+            return isOverlapping;
+          },
+        ).toList();
+
         if (reservationBookedByDate.isNotEmpty) {
           statusCode = "201";
           return reservationBookedByDate;
-
         } else {
           statusCode = "200";
           return noBooking;
